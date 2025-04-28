@@ -7,9 +7,9 @@ while [ "$#" -gt 0 ]; do
     max_depth="$2"
     shift 2
   else
-    if [ -z "$src_dir" ]; then
+    if [ -z "$from" ]; then
       from="$1"
-    elif [ -z "$dest_dir" ]; then
+    elif [ -z "$to" ]; then
       to="$1"
     fi
     shift
