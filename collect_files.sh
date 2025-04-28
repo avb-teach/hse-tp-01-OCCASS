@@ -1,10 +1,23 @@
 #!/bin/bash
 
-if [ -n "$4" ]; then
-    max_depth=$4
+max_depth=0
+
+while [ "$#" -gt 0 ]; do
+  if [ "$1" = "--max_depth" ]; then
+    max_depth="$2"
+    shift 2
+  else
+    if [ -z "$src_dir" ]; then
+      from="$1"
+    elif [ -z "$dest_dir" ]; then
+      to="$1"
+    fi
+    shift
+  fi
+done
+
+if [ "$max_depth" -gt 0 ]; then
+  find "$from" -type f -maxdepth "$max_depth" -exec cp {} "$to" \;
 else
-    max_depth=0
+  find "$from" -type f -exec cp {} "$to" \;
 fi
-
-find $1 -type f -maxdepth $max_depth -exec cp {} $2 \;
-
