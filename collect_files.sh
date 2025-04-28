@@ -17,7 +17,7 @@ while [ "$#" -gt 0 ]; do
 done
 
 if [ "$max_depth" -gt 0 ]; then
-  find "$from" -type f -maxdepth "$max_depth" -exec cp {} "$to" \;
+    find "$from" -type f -maxdepth "$max_depth" -exec sh -c 'mkdir -p "$2/$(dirname "${1#*/}")" && cp "$1" "$2/$(dirname "${1#*/}")"' _ {} "$to" \;
 else
-  find "$from" -type f -exec cp {} "$to" \;
+    find "$from" -type f -exec cp {} "$to" \;
 fi
